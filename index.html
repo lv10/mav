@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maria Aracelly's time on earth</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400|Roboto:100);
+      .block {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+          width: auto
+        clear: both;
+      }
+      .text {
+        color: #1abc9c;
+        font-size: 30px;
+        font-family: 'Roboto Condensed', serif;
+        font-weight: 400;
+        margin-top:10px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .digit {
+        color: #ecf0f1;
+        font-size: 100px;
+        font-weight: 100;
+        font-family: 'Roboto', serif;
+        margin: 10px;
+        text-align: center;
+      }
+      .date {
+        color: #ecf0f1;
+        font-size: 30px;
+        font-weight: 100;
+        font-family: 'Roboto', serif;
+        margin: 10px;
+        text-align: center;
+      }
+      .title {
+        color: #1abc9c;
+        font-size: 50px;
+        font-family: 'Roboto Condensed', serif;
+        font-weight: 400;
+        margin-top:10px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      #app{
+        align-items: center;
+        bottom: 0;
+        background-color: #34495e;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top:0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      {{ ready() }}
+
+      <h1 class="title">Maria Aracelly's Age Tracker</h1>
+      <div class="row">
+        <div class="block">
+          <p class="date">{{ birthday.toDateString() }} at {{ birthday.toLocaleTimeString() }}</p>
+          <p class="text">Birthday</p>
+        </div>
+        <div class="block">
+          <p class="date">{{ currentTime.toString() }}</p>
+          <p class="text">Today (NYC Time)</p>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="block">
+          <p class="digit">{{ yearsAlive }}</p>
+          <p class="text">years</p>
+        </div>
+        <div class="block">
+          <p class="digit">{{ weeksAlive }}</p>
+          <p class="text">weeks</p>
+        </div>
+        <div class="block">
+          <p class="digit">{{ daysAlive }}</p>
+          <p class="text">Days</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="block">
+          <p class="digit">{{ hoursAlive }}</p>
+          <p class="text">Hours</p>
+        </div>
+        <div class="block">
+          <p class="digit">{{ minutesAlive }}</p>
+          <p class="text">Minutes</p>
+        </div>
+        <div class="block">
+          <p class="digit">{{ secondsAlive }}</p>
+          <p class="text">Seconds</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        mounted: function() {
+          this.calDifference();
+        },
+        data: {
+          birthday: new Date(2016, 11, 21, 17, 07, 00),
+          currentTime: new Date(Date.now()),
+          daysAlive: '',
+          weeksAlive: '',
+          monthsAlive: '',
+          yearsAlive: '',
+          secondsAlive: '',
+          minutesAlive: '',
+          hoursAlive: ''
+        },
+        methods: {
+          ready() {
+            window.setInterval ( () => {
+              this.calDifference();
+            }, 1000);
+          },
+          calDifference: function () {
+            var now = new Date(Date.now());
+            var diff = now - this.birthday;
+
+            this.hoursAlive = Math.floor(diff / 1000 / 60 / 60);
+            diff -= this.hoursAlive * 1000 * 60 * 60;
+            this.minutesAlive = Math.floor(diff / 1000 / 60);
+            diff -= this.minutesAlive * 1000 * 60;
+            this.secondsAlive = Math.floor(diff / 1000);
+            diff -= this.secondsAlive * 1000;
+
+            this.daysAlive = this.floorNum(this.hoursAlive / 24);
+            this.monthsAlive = this.floorNum(this.daysAlive / 30);
+            this.yearsAlive = this.floorNum(this.monthsAlive / 12);
+            this.weeksAlive = this.floorNum(this.yearsAlive * 52.1429);
+
+          },
+          floorNum: function(figure, decimals) {
+            if (!decimals) decimals = 2;
+            var d = Math.pow(10, decimals);
+            return (parseInt(figure*d)/d).toFixed(decimals);
+          }
+        }
+      })
+
+    </script>
+  </body>
+</html>

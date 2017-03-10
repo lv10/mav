@@ -118,7 +118,7 @@
         },
         data: {
           birthday: new Date(2016, 11, 21, 17, 07, 00),
-          currentTime: new Date(Date.now()),
+          currentTime: '',
           daysAlive: '',
           weeksAlive: '',
           monthsAlive: '',
@@ -135,6 +135,7 @@
           },
           calDifference: function () {
             var now = new Date(Date.now());
+            this.currentTime = now;
             var diff = now - this.birthday;
 
             this.hoursAlive = Math.floor(diff / 1000 / 60 / 60);

@@ -147,7 +147,7 @@
             this.daysAlive = this.floorNum(this.hoursAlive / 24);
             this.monthsAlive = this.floorNum(this.daysAlive / 30);
             this.yearsAlive = this.floorNum(this.monthsAlive / 12);
-            this.weeksAlive = this.floorNum(this.yearsAlive * 52.1429);
+            this.weeksAlive = this.floorNum(this.daysAlive / 7);
 
           },
           floorNum: function(figure, decimals) {

@@ -134,6 +134,7 @@
 
     .Column {
         display: table-cell;
+        width: 100%;
         background-color: #f9f9f9;
         font-color: black;
     }

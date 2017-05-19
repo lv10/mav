@@ -111,6 +111,7 @@
         display: table-cell;
         background-color: #f9f9f9;
         font-color: black;
+        width: 100%;
     }
 
 </style>

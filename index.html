@@ -4,21 +4,40 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
+
+      let uk = '';
+
       $(document).ready(function() {
-        $("button").click(function() {
-          axios({
-            method: 'get',
-            url: 'api/users/token',
-            auth: {
-              username: 'luisvillamarin@gmail.com',
-              password: 'lv10gooal'
-            }
-          });
+        $("#login").submit(function() {
+          // Get input values
+          let values = $(this).serialize();
+          console.log(values);
+          <!--axios({-->
+          <!--  method: 'get',-->
+          <!--  url: 'http://127.0.0.1:5000/api/users/token',-->
+          <!--  auth: {-->
+          <!--    username: 'luisvillamarin@gmail.com',-->
+          <!--    password: 'lv10gooal'-->
+          <!--  }-->
+          <!--}).then(function(response) {-->
+          <!--  uk = response.data.token;-->
+          <!--});-->
         });
       });
+
+
     </script>
   </head>
   <body>
-    <button>Get HTTP Request</button>
+
+    <!--Login Form-->
+    <form action="index.html" id="login">
+      <input type="text" name="username" value="username">
+      <input type="password" name="password" value="password">
+      <br><br>
+      <input type="submit" value="login">
+    </form>
+    <!--end of login form-->
+
   </body>
 </html>
